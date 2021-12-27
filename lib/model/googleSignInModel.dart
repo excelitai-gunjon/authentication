@@ -1,4 +1,6 @@
-class ResGoogleSignInModel {
+import 'package:flutter/cupertino.dart';
+
+class ResGoogleSignInModel with ChangeNotifier{
   String? displayName;
   String? email;
   String? photoUrl;
@@ -6,14 +8,15 @@ class ResGoogleSignInModel {
   String? token;
 
   ResGoogleSignInModel({
-    required this.displayName,
-    required this.email,
-    required this.photoUrl,
-    required this.id,
-    required this.token,
+     this.displayName,
+     this.email,
+     this.photoUrl,
+     this.id,
+     this.token,
   });
 
-  ResGoogleSignInModel.fromJson(Map<String, dynamic> json) {
+
+  ResGoogleSignInModel.fromJson(Map<String, dynamic> json){
     displayName = json['displayName'];
     email = json['email'];
     photoUrl = json['photoUrl'];
@@ -29,5 +32,32 @@ class ResGoogleSignInModel {
     data['id'] = this.id;
     data['token'] = this.token;
     return data;
+  }
+}
+
+class UserList with ChangeNotifier{
+  List<ResGoogleSignInModel> _users=[
+    // ResGoogleSignInModel(
+    //   displayName: "sdfsd",
+    //   email: "sdfg",
+    //   photoUrl: "dsfghdsf",
+    //   id: "dhdfh",
+    //   token: "sfdghdsfh",
+    // )
+  ];
+
+  void addUser(String? displayName,String? email,String? photoUrl,String? id,String? token){
+    final user=ResGoogleSignInModel(
+      displayName: displayName,
+      email: email,
+      photoUrl: photoUrl,
+      id: id,
+      token: token,
+    );
+    _users.add(user);
+    notifyListeners();
+  }
+  List<ResGoogleSignInModel> get currentUser{
+    return _users;
   }
 }
