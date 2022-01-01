@@ -60,4 +60,8 @@ class UserList with ChangeNotifier{
   List<ResGoogleSignInModel> get currentUser{
     return _users;
   }
+  void remove()async{
+    await _users.remove(1);
+    notifyListeners();
+  }
 }

@@ -21,15 +21,26 @@ class _LogInState extends State<LogIn> {
     return Container(
       height: size.height,
       width: size.width,
+      color: Colors.deepOrange,
       child: Scaffold(
         appBar: AppBar(
           title: Text("Log In with Google"),
         ),
-        body: SignInButton(
-          Buttons.Google,
-          onPressed: (){
-            _googleSignInProcess(context);
-          },
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                height: 20,
+                child: SignInButton(
+                  Buttons.Google,
+                  onPressed: (){
+                    _googleSignInProcess(context);
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
         //_googleSignInProcess(context),
       ),
@@ -64,5 +75,5 @@ void _googleSignInProcess(BuildContext context) async {
     textColor: Colors.white,
   );
   //print(user.currentUser);
-  Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>UserProfile()));
+  Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>UserProfile(googleSignIn: _googleSignIn,)));
 }
